@@ -7,6 +7,7 @@
 .data
 .text
 
+# Start addres x10010000
 
 prep: # We will use this to set the n of disks and fill the disk on order from n to 1 in the space thery must be
 
