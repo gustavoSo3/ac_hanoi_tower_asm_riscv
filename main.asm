@@ -1,3 +1,8 @@
+## Made by
+#	Gustavo Jose Hernandez Sotres
+#	Alberto Sandoval Castro
+#	03/02/2022
+##
 
 .data
 .text
