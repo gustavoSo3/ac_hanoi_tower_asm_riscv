@@ -107,5 +107,4 @@ end_hanoi_recursive: 		## When we finish with the function
 	
 	jalr zero, ra, 0	## and we jump to the return addres and we dont save the new return address
 
-end: # This is just the en of the program.
-	jal zero, end
+end:			# This is just the en of the program.
