@@ -40,13 +40,16 @@ LOOP_B:
 	add s3, zero, t0		## here t0 has te start addres of the 3rd stack, so we save it.
 
 
-main: # Here well call the first time the hanoid_recursive section and jump to the end of the program recursive
-	add a0, zero, s0
-	add a1, zero, s1
+main:			# Here well call the first time the hanoid_recursive section 
+			# and jump to the end of the program recursive
+	add a0, zero, s0	## we move the arguments to the function,	
+	add a1, zero, s1	## a0 = N, a1 = SOURCE, a2 = TARGET a3 = AUXILIARY
 	add a2, zero, s2
 	add a3, zero, s3
-	jal ra, hanoi_recursive
-	jal zero, end
+	jal ra, hanoi_recursive	## here we call the hanoi_recursive function, and we store the return address on
+				## ra
+	jal zero, end		## this is were we will return when the program finishes to we just jump to
+				## the end of the program and don't store the return address
 	
 hanoi_recursive: # This is the section that will be call recursivelly 
 	addi sp, sp, -4
