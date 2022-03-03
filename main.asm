@@ -37,7 +37,13 @@ LOOP_B:
 
 
 main: # Here well call the first time the hanoid_recursive section and jump to the end of the program recursive
-
+	add a0, zero, s0
+	add a1, zero, s1
+	add a2, zero, s2
+	add a3, zero, s3
+	jal ra, hanoi_recursive
+	jal zero, end
+	
 hanoi_recursive: # This is the section that will be call recursivelly 
 
 end: # This is just the en of the program.
