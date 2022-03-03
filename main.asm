@@ -47,3 +47,4 @@ main: # Here well call the first time the hanoid_recursive section and jump to t
 hanoi_recursive: # This is the section that will be call recursivelly 
 
 end: # This is just the en of the program.
+	jal zero, end
