@@ -4,8 +4,6 @@
 #	03/02/2022
 ##
 
-.data
-.text
 
 # Start addres x10010000
 
