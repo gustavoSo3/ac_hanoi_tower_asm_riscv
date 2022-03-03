@@ -22,26 +22,18 @@ LOOP_A:
 	addi t0, t0, 4
 	bge t1, t2, LOOP_A
 	
-	add a0, zero, t0
-	addi a0, a0, -4
-	
+	add s1, zero, t0
+	addi s1, s1, -4
+	addi t0, t0, -4
+	add s2, zero, t0
+	addi t2, zero, 1
 	add t1, zero, s0
 LOOP_B:
 	addi t1, t1, -1
 	addi t0, t0, 4
 	bge t1, t2, LOOP_B
 	
-	add a1, zero, t0
-	addi a1, a1, -4
-	
-	add t1, zero, s0
-LOOP_C:
-	addi t1, t1, -1
-	addi t0, t0, 4
-	bge t1, t2, LOOP_C
-	
-	add a2, zero, t0
-	addi a2, a2, -4
+	add s3, zero, t0
 
 
 main: # Here well call the first time the hanoid_recursive section and jump to the end of the program recursive
