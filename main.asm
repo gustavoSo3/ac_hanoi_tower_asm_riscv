@@ -45,6 +45,55 @@ main: # Here well call the first time the hanoid_recursive section and jump to t
 	jal zero, end
 	
 hanoi_recursive: # This is the section that will be call recursivelly 
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	
+	add t0, zero, a0
+	add t1, zero, a1
+	add t2, zero, a2
+	add t3, zero, a3
+	
+	beq t0, zero, end_hanoi_recursive
+	
+	addi a0, t0, -1
+	add a1, zero, t1
+	add a2, zero, t3
+	add a3, zero, t2
+	jal ra, hanoi_recursive
+	addi t0, a0, 1
+	add t1, zero, a1
+	add t2, zero, a3
+	add t3, zero, a2
+	
+	lw t6, 0(t1)
+	sw zero, 0(t1)
+	beq t6, zero, no_move
+	addi t1, t1, -4
+	addi t2, t2, 4
+	sw t6, 0(t2)
+	
+no_move:
+	
+	addi a0, t0, -1
+	add a1, zero, t3
+	add a2, zero, t2
+	add a3, zero, t1
+	jal ra, hanoi_recursive
+	addi t0, a0, 1
+	add t1, zero, a3
+	add t2, zero, a2
+	add t3, zero, a1
+	
+end_hanoi_recursive:
+	lw ra, 0(sp)
+	addi sp, sp, 4
+	
+	add a0, zero, t0
+	add a1, zero, t1
+	add a2, zero, t2
+	add a3, zero, t3
+	
+	jalr zero, ra, 0
 
 end: # This is just the en of the program.
 	jal zero, end
