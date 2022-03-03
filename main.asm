@@ -4,34 +4,40 @@
 #	03/02/2022
 ##
 
+addi s0, zero, 3			## Here we load the value N for how many disks we will use
 
-# Start addres x10010000
-
-addi s0, zero, 8 ## Here we load the value N for how many disks we will use
-
-add t1, zero, s0
-addi t2, zero, 1
+add t1, zero, s0			## t1 is used on prep to generate te base tower and its disks and get the initial
+					## addresses of the 3 sticks,
+addi t2, zero, 1			## t2 is just used for the comparition for when to end going forward on
+					## on the address
 
 prep: 
-	lui t0, 0x10010
+	lui t0, 0x10010			## t0 will be used to store the addres we are currentlly on
+					## we set the upper word to 0x10010 because the initial address is x10010000
 LOOP_A:
-	sw t1, 0(t0)
-	addi t1, t1, -1
-	addi t0, t0, 4
-	bge t1, t2, LOOP_A
+					# At the same time we move up on the addres for the same stick, we fill it
+					# with the disks
+	sw t1, 0(t0)			## we store te bigger disk on the first address
+	addi t1, t1, -1			## we decrease the number of disk
+	addi t0, t0, 4			## and we add 4 to get the next word address
+	bge t1, t2, LOOP_A		## we check if we hare at the lower value disk, if we ain't we go back to loop_A
 	
-	add s1, zero, t0
-	addi s1, s1, -4
-	addi t0, t0, -4
-	add s2, zero, t0
-	addi t2, zero, 1
-	add t1, zero, s0
+					## In the case we finished filling the disks we store that address as the
+					## address for the first stack and allso the second
+					## since the second stack is empty and the stacks space are next to
+					## each other if the first stack is full and the second is empty, they will have
+					## the same address		
+					# NOTE: We store the inital address of the stacks on s1,s2,s3
+	addi t0, t0, -4			## we go back 1, for logic reasons
+	add s1, zero, t0		## We store the address of the first stack
+	add s2, zero, t0		## We store the address of the second stack
+	add t1, zero, s0		## We reset t2 to have the value of N
 LOOP_B:
-	addi t1, t1, -1
-	addi t0, t0, 4
+	addi t1, t1, -1			## and we keep moving forward, only this time, we dont store numbers
+	addi t0, t0, 4			## we just use the loop to move to the start addres of the 3rd stack
 	bge t1, t2, LOOP_B
 	
-	add s3, zero, t0
+	add s3, zero, t0		## here t0 has te start addres of the 3rd stack, so we save it.
 
 
 main: # Here well call the first time the hanoid_recursive section and jump to the end of the program recursive
